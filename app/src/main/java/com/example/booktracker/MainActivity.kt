@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity() {
             insets
 
         }
-        val tv = findViewById<TextView>(R.id.tv)
+    }
+
+    fun scan_qr_code() {
         val cover = findViewById<ImageView>(R.id.coverView)
         val options = GmsBarcodeScannerOptions.Builder()
             .setBarcodeFormats(
@@ -35,18 +37,17 @@ class MainActivity : AppCompatActivity() {
             .enableAutoZoom()
             .build()
 
-        val scanner = GmsBarcodeScanning.getClient(this)
+        val scanner = GmsBarcodeScanning.getClient(this, options)
         scanner.startScan()
             .addOnSuccessListener { barcode ->
-                tv.text = barcode.displayValue
-                val isbn = tv.text
+                val isbn = barcode.displayValue
                 lifecycleScope.launch {
                     try {
                         Log.d("isbn", isbn.toString().uppercase())
                         val book = RetrofitClient.api.getBookById(isbn.toString())
 
                         Log.d("API_RESULT", "User: ${book.title}")
-                        
+
 
                         Glide.with(baseContext).load("https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg").into(cover)
                     } catch (e: Exception) {
@@ -60,7 +61,5 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 // Task failed with an exception
             }
-
-
     }
 }

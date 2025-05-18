@@ -1,4 +1,4 @@
-package com.example.booktracker
+package com.example.booktracker.models
 
 import com.google.gson.annotations.SerializedName
 
