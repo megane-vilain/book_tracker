@@ -6,5 +6,6 @@ data class Book (
     val title: String,
     @SerializedName("number_of_pages")
     val nbPages: Int,
-    val works: ArrayList<Work>
+    val works: ArrayList<Work>,
+    val authors: List<Author>
 )
