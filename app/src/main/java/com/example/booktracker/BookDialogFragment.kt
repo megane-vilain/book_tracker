@@ -70,18 +70,6 @@ class BookDialogFragment : DialogFragment() {
         return dialogView
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.let { window ->
-            val metrics = resources.displayMetrics
-            val width = (metrics.widthPixels * 0.7).toInt()  // 50% of screen width
-            val height = (metrics.heightPixels * 0.6).toInt() // 60% of screen height
-
-            window.setLayout(width, height)
-            window.setBackgroundDrawableResource(android.R.color.transparent) // optional for rounded corners
-        }
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
